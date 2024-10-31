@@ -137,23 +137,10 @@ public class Consultoria {
     public Double getTotalSalariosPorTecnologia(String tecnologia){
         Double soma = 0.0;
 
-        for (int i = 0; i < desenvolvedores.size(); i++) {
-            if (desenvolvedores.get(i) instanceof DesenvolvedorWeb) {
+        List<Desenvolvedor> auxiliar = buscarPorTecnologia(tecnologia);
 
-                if (((DesenvolvedorWeb) desenvolvedores.get(i)).getBackend().equalsIgnoreCase(tecnologia) ||
-                        ((DesenvolvedorWeb) desenvolvedores.get(i)).getFrontend().equalsIgnoreCase(tecnologia) ||
-                        ((DesenvolvedorWeb) desenvolvedores.get(i)).getSgbd().equalsIgnoreCase(tecnologia)) {
-                    soma += desenvolvedores.get(i).calcularSalario();
-                }
-
-            } else if (desenvolvedores.get(i) instanceof DesenvolvedorMobile) {
-
-                if (((DesenvolvedorMobile) desenvolvedores.get(i)).getLinguagem().equalsIgnoreCase(tecnologia) ||
-                        ((DesenvolvedorMobile) desenvolvedores.get(i)).getPlataforma().equalsIgnoreCase(tecnologia)) {
-                    soma += desenvolvedores.get(i).calcularSalario();
-                }
-
-            }
+        for (int i = 0; i < auxiliar.size(); i++) {
+            soma += auxiliar.get(i).calcularSalario();
         }
 
         return soma;
